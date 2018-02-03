@@ -1,8 +1,18 @@
+const blogs = require('../models/blogs.model');
 const express = require('express');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    res.render('blogger', {title: 'the_CodeCave | blog'})
+    blogs.find({})
+        .then((data) => {
+            res.render('blogger',{
+                title: "Blogger",
+                blogs: data
+            });
+        })
+        .catch(err => {
+            console.log(err);
+        })
 });
 
 module.exports = router;

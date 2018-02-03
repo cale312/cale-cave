@@ -11,7 +11,8 @@ const app = express();
 
 // Route files
 const getAllBlogs = require('./routes/getBlogs');
-// const deleteBlog = require('./routes/deleteBlog');
+const postNewBlogs = require('./routes/postBlog');
+const deleteBlog = require('./routes/deleteBlog');
 
 // Connection Config file
 const connect = require('./config/connection');
@@ -36,7 +37,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // App Routes
 app.use('/', getAllBlogs);
-// app.use('/delete', deleteBlog);
+app.use('/', postNewBlogs);
+app.use('/delete', deleteBlog);
 
 const port = process.env.PORT || 8000;
 app.listen(port, (err) => {

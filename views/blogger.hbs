@@ -1,42 +1,45 @@
 <div class="container">
-    <h1>Blog Spot</h1>
-    <div class="input-field col s6">
-        <textarea id="textarea1" class="materialize-textarea"></textarea>
-        <label for="textarea1">Textarea</label>
-        <button class="btn waves-effect waves-light" type="submit" name="action">Post
-            <i class="material-icons right">send</i>
+    <div class="fixed-action-btn">
+        <button class="modal-trigger btn btn-large btn-floating" href="#newpostModal">
+            <i class="material-icons">add</i>
         </button>
     </div>
-    <br><br>
-    <div class="container">
 
-        <div class="row">
-        <div class="col s12 m5">
-            <a class="card-panel teal hoverable waves-effect waves-light modal-trigger" href="#modal1">
-            <span class="white-text">I am a very simple card. I am good at containing small bits of information.
-            I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.
-            </span>
-            </a>
+    {{!-- Modal structure for new post --}}
+    <div id="newpostModal" class="modal">
+        <div class="container">
+            <form action="" method="post" class="row">
+                <div class="input-field col s12">
+                    <textarea id="textarea1" name="blog" class="materialize-textarea" required></textarea>
+                    <label for="textarea1">Textarea</label>
+                    <button class="btn btn-large waves-effect waves-light green" type="submit" name="action">Post
+                        <i class="material-icons right">send</i>
+                    </button>
+                    <span class="modal-action modal-close btn-large red right">cancel</span>
+                </div>
+            </form>
         </div>
-        </div>
-
-        <!-- Modal Structure -->
-        <div id="modal1" class="modal modal-fixed-footer">
-            <div class="modal-content">
-                <h4>Modal Header</h4>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime inventore ad, repellat error a, hic vel enim id, consequatur mollitia consequuntur provident reprehenderit ab magni commodi? Exercitationem accusantium eius non.</p>
-            </div>
-            <div class="modal-footer">
-                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">close</a>
-            </div>
-        </div>
-
     </div>
-
+    <br><br>
+    <div>
+        <div class="row">
+        {{#each blogs}}
+            <div class="col s12 m5">
+                <div class="card-panel teal hoverable waves-effect waves-light" href="">
+                    <span class="white-text">{{this.blog}}</span>
+                    <hr>
+                    <span class="white-text">{{this.dateAdded}}</span>
+                    <a href="/delete/{{this.id}}" class="white-text right">
+                        <i class="material-icons">delete</i>
+                    </a>
+                </div>
+            </div>
+        {{/each}}
+        </div>
+    </div>
 
     <script>
         $(document).ready(function(){
-            // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
             $('.modal').modal();
         });
     </script>

@@ -1,6 +1,6 @@
 module.exports = () => {
     const mongoose = require('mongoose');
-    const mongoURL = process.env.MONGO_DB_URL || "mongodb://blogs:blogs@ds221228.mlab.com:21228/blogspot";
+    const mongoURL = process.env.MONGO_DB_URL || "mongodb://localhost/blogspot" // "mongodb://blogs:blogs@ds221228.mlab.com:21228/blogspot";
     mongoose.connect(mongoURL);
 
     var db = mongoose.connection;
