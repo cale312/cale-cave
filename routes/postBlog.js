@@ -1,16 +1,7 @@
 const blogs = require('../models/blogs.model');
+const whereMyHashtags = require('../libs/whereMyHashtags');
 const express = require('express');
 const router = express.Router();
-
-// function that returns an array of all the #hashtags
-const whereMyHashtags = (sentence) => {
-    let hashtags = [];
-    let splitSentence = sentence.split(' ');
-    splitSentence.map( word => {
-        (word.startsWith('#')) ? hashtags.push(word) : false;
-    });
-    return hashtags;
-}
 
 router.post('/', (req, res) => {
     let data = req.body;
