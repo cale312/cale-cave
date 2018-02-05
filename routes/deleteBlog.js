@@ -2,11 +2,12 @@ const blogs = require('../models/blogs.model');
 const express = require('express');
 const router = express.Router();
 
-router.get('/:_id', (req, res) => {
+router.post('/:_id/delete', (req, res) => {
+    let blogId = req.params._id;
     blogs.findOneAndRemove({
-        _id: req.params._id
+        _id: blogId
     })
-    .then(result => {
+    .then( () => {
         blogs.find({})
             .then( (data) => {
                 res.json({
