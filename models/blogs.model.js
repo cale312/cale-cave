@@ -4,6 +4,10 @@ const blogSchema = mongoose.Schema({
     blog: {
         type: String
     },
+    hashtags: {
+        type: [],
+        default: []
+    },
     comments: {
         type: [],
         default: []
