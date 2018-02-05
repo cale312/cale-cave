@@ -54,8 +54,3 @@ const port = process.env.PORT || 8000;
 app.listen(port, (err) => {
     (err) ? console.error(err) : log(chalk.blue.bold('=====>\nlisitening on https://localhost:' + port));
 })
-
-/*
-    Add comment section for the blogs
-    Add like and dislike of the blogs
- */
