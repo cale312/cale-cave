@@ -38,11 +38,12 @@ app.use(cookieParser());
 // App Routes
 app.get('/', (req, res) => {
     res.send({
-        getAllBlogs_postBlog: '/api/v1/blogs',
-        deleteBlog: '/api/v1/delete/:_blogId',
-        updateBlog: '/api/v1/update/:_blogId',
-        likeBlog: '/api/v1/like/:_blogId',
-        dislikeBlog: '/api/v1/dislike/:_blogId'
+        getAllBlogs_postBlog: '/api/v1/blogs/',
+        commentBlog: '/api/v1/blogs/:_blog_id/comment/',
+        deleteBlog: '/api/v1/blogs/:_blog_id/delete/',
+        updateBlog: '/api/v1/blogs/:_blog_id/update/',
+        likeBlog: '/api/v1/blogs/:_blog_id/like/',
+        dislikeBlog: '/api/v1/blogs/:_blog_id/dislike/'
     })
 });
 app.use('/api/v1/blogs', getAllBlogs);
