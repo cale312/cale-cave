@@ -13,6 +13,7 @@ const app = express();
 
 // Route files
 const getAllBlogs = require('./routes/getBlogs');
+const getBlogById = require('./routes/getBlogById');
 const postNewBlogs = require('./routes/postBlog');
 const commentBlog = require('./routes/commentBlog');
 const deleteBlog = require('./routes/deleteBlog');
@@ -47,8 +48,13 @@ app.get('/', (req, res) => {
     })
 });
 app.use('/api/v1/blogs', getAllBlogs);
+app.use('/api/v1/blogs', getBlogById);
 app.use('/api/v1/blogs', postNewBlogs);
-app.use('/api/v1/delete', deleteBlog);
+app.use('/api/v1/blogs', deleteBlog);
+app.use('/api/v1/blogs', updateBlog);
+app.use('/api/v1/blogs', commentBlog);
+app.use('/api/v1/blogs', likeBlog);
+app.use('/api/v1/blogs', dislikeBlog);
 
 const port = process.env.PORT || 8000;
 app.listen(port, (err) => {
