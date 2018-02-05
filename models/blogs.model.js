@@ -8,6 +8,14 @@ const blogSchema = mongoose.Schema({
         type: [],
         default: []
     },
+    likes: {
+        type: Number,
+        default: 0
+    },
+    dislikes: {
+        type: Number,
+        default: 0
+    },
     dateAdded: {
         type: Date,
         default: Date.now

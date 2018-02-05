@@ -36,13 +36,22 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 // App Routes
+app.get('/', (req, res) => {
+    res.send({
+        getAllBlogs_postBlog: '/api/v1/blogs',
+        deleteBlog: '/api/v1/delete/:_blogId',
+        updateBlog: '/api/v1/update/:_blogId',
+        likeBlog: '/api/v1/like/:_blogId',
+        dislikeBlog: '/api/v1/dislike/:_blogId'
+    })
+});
 app.use('/api/v1/blogs', getAllBlogs);
 app.use('/api/v1/blogs', postNewBlogs);
 app.use('/api/v1/delete', deleteBlog);
 
 const port = process.env.PORT || 8000;
 app.listen(port, (err) => {
-    (err) ? console.error(err) : log(chalk.blue.bold('lisitening on https://localhost:' + port));
+    (err) ? console.error(err) : log(chalk.blue.bold('=====>\nlisitening on https://localhost:' + port));
 })
 
 /*
