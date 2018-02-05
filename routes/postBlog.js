@@ -16,15 +16,15 @@ router.post('/', (req, res) => {
     let data = req.body;
     let hashtags = whereMyHashtags(data.blog);
     blogs.create({
-        blog: data.blog
+        blog: data.blog,
+        hashtags: hashtags
     })
     .then(result => {
         blogs.find({})
             .then((newData) => {
                 data.blog = "";
                 res.json({
-                    blogs: newData,
-                    hashtags: hashtags
+                    blogs: newData
                 });
             })
             .catch(err => {
