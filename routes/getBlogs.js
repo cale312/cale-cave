@@ -5,8 +5,7 @@ const router = express.Router();
 router.get('/', (req, res) => {
     blogs.find({})
         .then((data) => {
-            res.render('blogger',{
-                title: "Blogger",
+            res.json({
                 blogs: data
             });
         })

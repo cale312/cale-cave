@@ -8,8 +8,10 @@ router.get('/:_id', (req, res) => {
     })
     .then(result => {
         blogs.find({})
-            .then( () => {
-                res.redirect('/');
+            .then( (data) => {
+                res.json({
+                    blogs: data
+                });
             })
             .catch(err => {
                 console.log(err);

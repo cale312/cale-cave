@@ -23,10 +23,6 @@ connect();
 app.use(flash());
 app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 * 30 }, resave: true, saveUninitialized: true }));
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hbs');
-
 // uncomment after placing your favicon in /public
 // app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
@@ -36,11 +32,16 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // App Routes
-app.use('/', getAllBlogs);
-app.use('/', postNewBlogs);
-app.use('/delete', deleteBlog);
+app.use('/api/cale_blog/v1', getAllBlogs);
+app.use('/api/cale_blog/v1', postNewBlogs);
+app.use('/api/cale_blog/v1/delete', deleteBlog);
 
 const port = process.env.PORT || 8000;
 app.listen(port, (err) => {
     (err) ? console.error(err) : console.log('lisitening on https://locahost:' + port);
 })
+
+/*
+    Add comment section for the blogs
+    Add like and dislike of the blogs
+ */
