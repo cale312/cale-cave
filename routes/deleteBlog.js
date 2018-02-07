@@ -9,7 +9,7 @@ router.post('/:_id/delete', (req, res) => {
         _id: blogId
     })
     .then( () => {
-        commentsModel.findByIdAndRemove({
+        commentsModel.findOneAndRemove({
             commentFor: blogId
         })
         .then( () => {
