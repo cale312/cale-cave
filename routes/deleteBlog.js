@@ -14,13 +14,13 @@ router.post('/:_id/delete', (req, res) => {
         })
         .then( (data) => {
             data.remove()
-                .then( () => {
-                    blogs.find({})
-                        .then( (data) => {
-                            res.json({
-                                blogs: data
-                            });
-                        })
+        })
+        .then( () => {
+            blogs.find({})
+                .then( (data) => {
+                    res.json({
+                        blogs: data
+                    });
                 })
         })
     })
