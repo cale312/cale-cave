@@ -1,0 +1,56 @@
+* {
+    font-family: sans-serif;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1 0 auto;
+  }
+
+.section {
+    cursor: pointer !important;
+}
+
+.section:hover {
+    background: linear-gradient(to right, white, rgba(2, 2, 2, 0.1), white);
+}
+
+.blogs {
+    animation: 3s fadeIn;
+}
+
+@keyframes fadeIn {
+    from {
+        display: flex;
+        opacity: 0;
+        margin: 0px;
+    }
+}
+
+.card {
+    background: url('http://i.imgur.com/lDDB0R0.png');
+    background-size: cover;
+    padding: 35px !important;
+}
+
+.card-action a .material-icons, .delete {
+    cursor: pointer;
+}
+
+.card-action a .material-icons:hover {
+    color: rgba(255, 255, 255, 0.589);
+}
+
+.footer {
+    position: absolute;
+    right: 0;
+    bottom: -50px;
+    left: 0;
+    padding: 1rem;
+    text-align: center;
+}
