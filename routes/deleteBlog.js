@@ -6,24 +6,27 @@ const router = express.Router();
 router.post('/:_id/delete', (req, res) => {
     let blogId = req.params._id;
     blogs.findOneAndRemove({
-        _id: blogId
-    })
-    .then( () => {
-        commentsModel.findOneAndRemove({
-            commentFor: blogId
+            _id: blogId
         })
-        .then( () => {
-            blogs.find({})
-                .then( (data) => {
-                    res.json({
-                        blogs: data
-                    });
-                })
+        .then((blog) => {
+            blog.comments.map((comment) => {
+                console.log(comment);
+                commentsModel.findOneAndRemove({
+                        commentFor: comment.commentFor
+                    })
+                    .then(() => {
+                        blogs.find({})
+                            .then((data) => {
+                                res.json({
+                                    blogs: data
+                                });
+                            })
+                    })
+            })
         })
-    })
-    .catch(err => {
-        console.log(err);
-    })
+        .catch(err => {
+            console.log(err);
+        })
 });
 
 module.exports = router;
