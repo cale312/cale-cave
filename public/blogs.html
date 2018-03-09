@@ -6,13 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Blogger | Blogs</title>
-    <script src="/socket.io/socket.io.js"></script>
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Local css files -->
     <link rel="stylesheet" href="./stylesheets/materialize/css/materialize.css">
     <link rel="stylesheet" href="./stylesheets/main.css">
-    <link rel="icon" href="https://cdn.geekwire.com/wp-content/uploads/2015/01/code-fellows-logo-shield-266x300.png">
+    <!-- <link rel="icon" href="https://cdn.geekwire.com/wp-content/uploads/2015/01/code-fellows-logo-shield-266x300.png"> -->
 </head>
 <nav class="red lighten-1 fixed" role="navigation">
     <div class="nav-wrapper container">
@@ -76,7 +75,7 @@
                 <span data-bind="html: loader"></span>
             </center>
             <div data-bind="visible: data, foreach: blogs" class="col s12 m8 blogs">
-                <div class="col s12 m6">
+                <div class="">
                     <div class="card transparent darken-1 hoverable">
                         <div data-bind="click: $parent.delete" class="delete" onclick="Materialize.toast('Post deleted', 1500)">
                             <i class="right material-icons white-text">delete</i>
@@ -153,9 +152,10 @@
     </div>
 
     <!-- Local javascript files -->
-    <script src="./javascripts/knockout-3.4.2.js"></script>
     <script src="./javascripts/jquery-3.3.1.min.js"></script>
+    <script src="./javascripts/knockout-3.4.2.js"></script>
     <script src="./stylesheets/materialize/js/materialize.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
     <script src="./javascripts/main.js"></script>
     <script src="./javascripts/navBar.js"></script>
     <script src="./javascripts/modals.js"></script>

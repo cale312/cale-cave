@@ -2,8 +2,8 @@
 
 // comment in for using local hosted api
 const apiUrl = 'http://localhost:8000/api/v1/blogs/';
-const port = process.env.PORT || 8000;
-var socket = io.connect(`http://localhost:${port}`);
+const port = location.port || 8000;
+var socket = io.connect('http://localhost:' + port);
 
 function Blog(blog, date, comments, likes, dislikes, hashtags, id) {
   this.comments = comments.length;
@@ -25,9 +25,7 @@ function Comments(comments, hashtags, date) {
 function likeBlog(_id) {
   $.ajax(apiUrl + _id + '/like', {
     type: "POST",
-    success: (result) => {
-      console.log(result);
-    }
+    success: (result) => { }
   });
 }
 
@@ -35,9 +33,7 @@ function likeBlog(_id) {
 function disLikeBlog(_id) {
   $.ajax(apiUrl + _id + '/dislike', {
     type: "POST",
-    success: (result) => {
-      console.log(result);
-    }
+    success: (result) => { }
   });
 }
 
@@ -54,14 +50,13 @@ function AppViewModel() {
   function getData() {
     return $.getJSON(apiUrl)
       .then((result) => {
+        console.log('DATA LOADED SUCCESSFUL!')
         let blogs = [];
         let hashtags = [];
         let data = result.blogs;
-        console.log(data);
         data.map((item) => {
           blogs.push(new Blog(item.blog, item.dateAdded, item.comments, item.likes, item.dislikes, item.hashtags, item._id));
         });
-        console.log(blogs);
         self.data(true);
         self.loader('');
         self.blogs(blogs);
@@ -87,7 +82,7 @@ function AppViewModel() {
       })
   }
 
-  // fire the getData function to display all the blogs in the database
+  // Fire the getData function to display all the blogs in the database
   getData();
 
   self.post = () => {
@@ -101,10 +96,10 @@ function AppViewModel() {
         contentType: "application/json",
         success: (result) => {
           document.querySelector('.blog').value = '';
+          // Emit post to trigger event
+          socket.emit('post');
         }
       });
-      // Emit post to trigger event
-      socket.emit('post');
     } else {
       alert('the fuck dude, post something or go!')
     }
@@ -121,7 +116,7 @@ function AppViewModel() {
     blogId = evt.id;
     disLikeBlog(blogId);
     // Emit post to trigger event
-    socket.emit('dislike', data);
+    socket.emit('dislike');
   }
 
   self.getComments = (evt) => {
@@ -142,7 +137,7 @@ function AppViewModel() {
           document.querySelector('.comment').value = '';
           getComments(blogId);
           // Emit post to trigger event
-          socket.emit('comment', data);
+          socket.emit('comment');
         }
       });
     } else {
@@ -165,10 +160,9 @@ function AppViewModel() {
   socket.on('post', () => { getData() });
   socket.on('like', () => { getData() });
   socket.on('dislike', () => { getData() });
-  socket.on('comment', () => { getData() });
   socket.on('delete', () => { getData() });
+  socket.on('comment', () => { getData() });
 
 }
-
 
 ko.applyBindings(new AppViewModel());

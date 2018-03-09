@@ -15,6 +15,7 @@ main {
 @media(max-width: 1000px) {
     .blogs {
         height: 320px !important;
+        display: block !important;
     }
 }
 
@@ -31,6 +32,9 @@ main {
     overflow: auto;
     overflow-x: hidden;
     height: 450px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 1em;
 }
 
 @keyframes fadeIn {

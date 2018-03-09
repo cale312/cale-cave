@@ -15,7 +15,7 @@ const app = express();
 // Port config and starting the server
 const port = process.env.PORT || 8000;
 const server = app.listen(port, (err) => {
-    (err) ? console.error(err) : log(chalk.blue.bold('=====>\nlisitening on https://localhost:' + port));
+    (err) ? console.error(err) : log(chalk.blue.bold('=====>\nlisitening on http://localhost:' + port));
 })
 
 // Route files
