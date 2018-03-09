@@ -2,6 +2,7 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const flash = require('express-flash');
+const socket = require('socket.io');
 const express = require('express');
 const logger = require('morgan');
 const chalk = require('chalk');
@@ -10,6 +11,12 @@ const cors = require('cors');
 const log = console.log;
 
 const app = express();
+
+// Port config and starting the server
+const port = process.env.PORT || 8000;
+const server = app.listen(port, (err) => {
+    (err) ? console.error(err) : log(chalk.blue.bold('=====>\nlisitening on https://localhost:' + port));
+})
 
 // Route files
 const getBlogById = require('./routes/getBlogById');
@@ -66,7 +73,15 @@ app.use('/api/v1/blogs', commentBlog);
 app.use('/api/v1/blogs', likeBlog);
 app.use('/api/v1/blogs', dislikeBlog);
 
-const port = process.env.PORT || 8000;
-app.listen(port, (err) => {
-    (err) ? console.error(err) : log(chalk.blue.bold('=====>\nlisitening on https://localhost:' + port));
-})
+// Socket setup & pass server
+var io = socket(server);
+io.on('connection', (socket) => {
+
+    // send new data to all the connected ports
+    socket.on('post', () => { io.sockets.emit('post') });
+    socket.on('like', () => { io.sockets.emit('like') });
+    socket.on('dislike', () => { io.sockets.emit('dislike') });
+    socket.on('comment', () => { io.sockets.emit('comment') });
+    socket.on('delete', () => { io.sockets.emit('delete') });
+
+});
