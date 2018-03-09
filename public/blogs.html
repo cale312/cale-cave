@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="./stylesheets/main.css">
     <link rel="icon" href="https://cdn.geekwire.com/wp-content/uploads/2015/01/code-fellows-logo-shield-266x300.png">
 </head>
-<nav class="red lighten-1" role="navigation">
+<nav class="red lighten-1 fixed" role="navigation">
     <div class="nav-wrapper container">
         <a id="logo-container" href="index.html" class="brand-logo">
             <i class="material-icons">code</i>
@@ -46,40 +46,45 @@
         </a>
     </div>
 </nav>
+
 <body>
 
-    <div class="container">
+    <div class="main">
         <div class="row">
 
             <!-- New post input field -->
-            <div class="container">
+            <div class="col s12 m4">
                 <div class="row">
                     <form class="col s12">
                         <div class="row">
-                            <div class="input-field col s12">
-                                <i class="material-icons prefix">mode_edit</i>
+                            <div class="input-field col s10">
                                 <textarea id="textarea1" class="materialize-textarea blog" required></textarea>
                                 <label for="textarea1">what's on your mind</label>
-                                <button type="submit" class="btn" data-bind="click: post">submit <i class="material-icons">send</i></button>
+                                <button type="submit" class="btn btn-large" data-bind="click: post">submit
+                                    <i class="material-icons">send</i>
+                                </button>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
             <center>
-                <br><br><br>
+                <br>
+                <br>
+                <br>
                 <span data-bind="html: loader"></span>
             </center>
-
-            <div data-bind="visible: data, foreach: blogs">
+            <div data-bind="visible: data, foreach: blogs" class="col s12 m8 blogs">
                 <div class="col s12 m6">
                     <div class="card transparent darken-1 hoverable">
-                        <div data-bind="click: $parent.delete" class="delete">
+                        <div data-bind="click: $parent.delete" class="delete" onclick="Materialize.toast('Post deleted', 1500)">
                             <i class="right material-icons white-text">delete</i>
                         </div>
                         <div class="card-content white-text">
                             <span class="card-title">
-                                <strong><small data-bind="text: date"></small></strong>
+                                <strong>
+                                    <small data-bind="text: date"></small>
+                                </strong>
                                 <hr>
                             </span>
                             <p data-bind="text: blog"></p>
@@ -88,9 +93,18 @@
                             <i class="yellow-text new badge" data-bind="text: $data"></i>
                         </div>
                         <div class="card-action">
-                            <a class="white-text" data-bind="click: $parent.like" onclick="Materialize.toast('You like this post!', 2000)"><i class="material-icons tooltipped" data-position="bottom" data-delay="50" data-tooltip="I am a tooltip">thumb_up</i><i data-bind="text: likes"></i></a>
-                            <a class="white-text" data-bind="click: $parent.dislike" onclick="Materialize.toast('You disliked this post!', 2000)"><i class="material-icons">thumb_down</i><i data-bind="text: dislikes"></i></a>
-                            <a href="#comment-modal" class="white-text modal-trigger" data-bind="click: $parent.getComments"><i class="material-icons">chat</i><i data-bind="text: comments"></i></a>
+                            <a class="white-text" data-bind="click: $parent.like" onclick="Materialize.toast('You liked the post!', 1500)">
+                                <i class="material-icons tooltipped" data-position="bottom" data-delay="50" data-tooltip="I am a tooltip">thumb_up</i>
+                                <i data-bind="text: likes"></i>
+                            </a>
+                            <a class="white-text" data-bind="click: $parent.dislike" onclick="Materialize.toast('You disliked the post!', 1500)">
+                                <i class="material-icons">thumb_down</i>
+                                <i data-bind="text: dislikes"></i>
+                            </a>
+                            <a href="#comment-modal" class="white-text modal-trigger" data-bind="click: $parent.getComments">
+                                <i class="material-icons">chat</i>
+                                <i data-bind="text: comments"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -108,7 +122,9 @@
                                 <textarea id="textarea1" class="materialize-textarea comment"></textarea>
                                 <label for="textarea1">Textarea</label>
                             </div>
-                            <button class="btn" data-bind="click: comment" onclick="Materialize.toast('Comment sent', 2000)">Post <i class="material-icons">send</i></button>
+                            <button class="btn" data-bind="click: comment" onclick="Materialize.toast('you commented on this post', 1500)">Post
+                                <i class="material-icons">send</i>
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -129,7 +145,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat red white-text">close</a>
+                <a href="" class="modal-action modal-close waves-effect waves-green btn-flat red white-text">close</a>
             </div>
         </div>
 
