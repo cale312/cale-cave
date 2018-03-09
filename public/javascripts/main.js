@@ -2,6 +2,8 @@
 
 // comment in for using local hosted api
 const apiUrl = 'http://localhost:8000/api/v1/blogs/';
+const port = process.env.PORT || 8000;
+var socket = io.connect(`http://localhost:${port}`);
 
 function Blog(blog, date, comments, likes, dislikes, hashtags, id) {
   this.comments = comments.length;
@@ -99,9 +101,10 @@ function AppViewModel() {
         contentType: "application/json",
         success: (result) => {
           document.querySelector('.blog').value = '';
-          getData();
         }
       });
+      // Emit post to trigger event
+      socket.emit('post');
     } else {
       alert('the fuck dude, post something or go!')
     }
@@ -110,13 +113,15 @@ function AppViewModel() {
   self.like = (evt) => {
     blogId = evt.id;
     likeBlog(blogId);
-    getData()
+    // Emit post to trigger event
+    socket.emit('like');
   }
 
   self.dislike = (evt) => {
     blogId = evt.id;
     disLikeBlog(blogId);
-    getData()
+    // Emit post to trigger event
+    socket.emit('dislike', data);
   }
 
   self.getComments = (evt) => {
@@ -136,11 +141,12 @@ function AppViewModel() {
         success: (result) => {
           document.querySelector('.comment').value = '';
           getComments(blogId);
-          getData();
+          // Emit post to trigger event
+          socket.emit('comment', data);
         }
       });
     } else {
-      alert('pleas type something');
+      alert('please type something');
     }
   }
 
@@ -149,11 +155,20 @@ function AppViewModel() {
     $.ajax(apiUrl + blogId + '/delete', {
       type: "POST",
       success: (result) => {
-        getData();
+        socket.emit('delete');
       }
     });
   }
 
+
+  // listening for events
+  socket.on('post', () => { getData() });
+  socket.on('like', () => { getData() });
+  socket.on('dislike', () => { getData() });
+  socket.on('comment', () => { getData() });
+  socket.on('delete', () => { getData() });
+
 }
+
 
 ko.applyBindings(new AppViewModel());
