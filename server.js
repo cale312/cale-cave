@@ -1,23 +1,24 @@
-const express = require('express');
-const logger = require('morgan');
 const cookieParser = require('cookie-parser');
+const session = require('express-session');
 const bodyParser = require('body-parser');
 const flash = require('express-flash');
-const session = require('express-session');
-const path = require('path');
+const express = require('express');
+const logger = require('morgan');
 const chalk = require('chalk');
+const path = require('path');
+const cors = require('cors');
 const log = console.log;
 
 const app = express();
 
 // Route files
-const getAllBlogs = require('./routes/getBlogs');
 const getBlogById = require('./routes/getBlogById');
-const postNewBlogs = require('./routes/postBlog');
-const commentBlog = require('./routes/commentBlog');
 const deleteBlog = require('./routes/deleteBlog');
-const updateBlog = require('./routes/updateBlog');
+const getAllBlogs = require('./routes/getBlogs');
+const commentBlog = require('./routes/commentBlog');
 const likeBlog = require('./routes/likeBlog');
+const postNewBlogs = require('./routes/postBlog');
+const updateBlog = require('./routes/updateBlog');
 const dislikeBlog = require('./routes/dislikeBlog');
 
 // Connection Config file
@@ -28,21 +29,22 @@ connect();
 // Static files
 app.use(express.static('public'));
 
+// use express middleware
+app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 * 30 }, resave: true, saveUninitialized: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(cookieParser());
+app.use(logger('dev'));
+app.use(cors());
+
 // cors
-app.use((req, res) => {
+app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Credentials', 'true');
     res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Access-Control-Allow-Credentials');
+    next();
 });
-
-// flash messages set =up
-app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 * 30 }, resave: true, saveUninitialized: true }));
-
-app.use(logger('dev'));
-app.use(cookieParser());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
 
 // App Routes
 app.get('/', (req, res) => {
