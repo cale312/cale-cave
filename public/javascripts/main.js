@@ -103,6 +103,7 @@ function AppViewModel() {
     } else {
       alert('the fuck dude, post something or go!')
     }
+    socket.on('post', () => { getData() });    
   }
 
   self.like = (evt) => {
@@ -143,6 +144,7 @@ function AppViewModel() {
     } else {
       alert('please type something');
     }
+    socket.on('comment', () => { getData() });
   }
 
   self.delete = (evt) => {
@@ -153,15 +155,13 @@ function AppViewModel() {
         socket.emit('delete');
       }
     });
+    socket.on('delete', () => { getData() });
   }
 
 
   // listening for events
-  socket.on('post', () => { getData() });
   socket.on('like', () => { getData() });
   socket.on('dislike', () => { getData() });
-  socket.on('delete', () => { getData() });
-  socket.on('comment', () => { getData() });
 
 }
 
