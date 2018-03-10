@@ -10,7 +10,6 @@ router.post('/:_id/delete', (req, res) => {
         })
         .then((blog) => {
             blog.comments.map((comment) => {
-                console.log(comment);
                 commentsModel.findOneAndRemove({
                         commentFor: comment.commentFor
                     })

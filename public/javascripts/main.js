@@ -53,7 +53,7 @@ function AppViewModel() {
         console.log('DATA LOADED SUCCESSFUL!')
         let blogs = [];
         let hashtags = [];
-        let data = result.blogs;
+        let data = result.blogs.sort();
         data.map((item) => {
           blogs.push(new Blog(item.blog, item.dateAdded, item.comments, item.likes, item.dislikes, item.hashtags, item._id));
         });
