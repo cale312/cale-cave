@@ -101,8 +101,7 @@ function AppViewModel() {
       });
     } else {
       alert('the fuck dude, post something or go!')
-    }
-    socket.on('post', () => { getData() });    
+    }  
   }
 
   self.like = (evt) => {
@@ -158,6 +157,7 @@ function AppViewModel() {
   
   
   // listening for events
+  socket.on('post', () => { getData() });  
   socket.on('like', () => { getData() });
   socket.on('dislike', () => { getData() });
   socket.on('delete', () => { getData() });
