@@ -2,7 +2,7 @@
 
 // comment in for using local hosted api
 const apiUrl = 'http://localhost:8000/api/v1/blogs/';
-var socket = io.connect('http://localhost:8000');
+var socket = io.connect();
 
 function Blog(blog, date, comments, likes, dislikes, hashtags, id) {
   this.comments = comments.length;
