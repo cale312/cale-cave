@@ -45,7 +45,7 @@ main {
 }
 
 .card {
-    background: url('http://i.imgur.com/lDDB0R0.png');
+    background-color: blueviolet;
     background-size: cover;
     padding: 35px !important;
 }
