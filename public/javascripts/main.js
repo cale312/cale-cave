@@ -154,13 +154,13 @@ function AppViewModel() {
         socket.emit('delete');
       }
     });
-    socket.on('delete', () => { getData() });
   }
-
-
+  
+  
   // listening for events
   socket.on('like', () => { getData() });
   socket.on('dislike', () => { getData() });
+  socket.on('delete', () => { getData() });
 
 }
 

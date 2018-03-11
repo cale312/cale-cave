@@ -45,8 +45,7 @@ main {
 }
 
 .card {
-    background-color: blueviolet;
-    background-size: cover;
+    background-color: purple !important;
     padding: 35px !important;
 }
 
