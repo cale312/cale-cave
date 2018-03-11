@@ -98,7 +98,9 @@ function AppViewModel() {
           // Emit post to trigger event
           socket.emit('post');
         }
-      });
+      }).then( () => {
+        socket.on('post', () => { getData() });
+      })
     } else {
       alert('the fuck dude, post something or go!')
     }  
@@ -138,11 +140,12 @@ function AppViewModel() {
           // Emit post to trigger event
           socket.emit('comment');
         }
-      });
+      }).then( () => {
+        socket.on('comment', () => { getData() });
+      })
     } else {
       alert('please type something');
     }
-    socket.on('comment', () => { getData() });
   }
 
   self.delete = (evt) => {
@@ -152,15 +155,15 @@ function AppViewModel() {
       success: (result) => {
         socket.emit('delete');
       }
-    });
+    }).then( () => {
+      socket.on('delete', () => { getData() });
+    })
   }
   
   
   // listening for events
-  socket.on('post', () => { getData() });  
   socket.on('like', () => { getData() });
   socket.on('dislike', () => { getData() });
-  socket.on('delete', () => { getData() });
 
 }
 
