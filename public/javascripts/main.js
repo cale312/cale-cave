@@ -1,7 +1,7 @@
-//const apiUrl = 'https://cale-blog.herokuapp.com/api/v1/blogs/';
+const apiUrl = 'https://cale-blog.herokuapp.com/api/v1/blogs/';
 
 // comment in for using local hosted api
-const apiUrl = 'http://localhost:8000/api/v1/blogs/';
+// const apiUrl = 'http://localhost:8000/api/v1/blogs/';
 var socket = io.connect();
 
 function Blog(blog, date, comments, likes, dislikes, hashtags, id) {
